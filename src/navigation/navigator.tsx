@@ -17,10 +17,12 @@ export const Navigator = () => {
         }
     }}
     >
-      <Stack.Screen name="Maps" component={MapScreen} />
       <Stack.Screen name="Permissions" component={PermmisionsScreen} />
+      <Stack.Screen name="Maps" component={MapScreen} />
+      
       
     </Stack.Navigator>
+    //225765239
   );
 }
 
