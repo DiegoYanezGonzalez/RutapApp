@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     title:{
-        width:400,
+        width:200,
         fontSize:18,
         textAlign:'center',
         marginBottom:15
@@ -45,3 +45,4 @@ const styles = StyleSheet.create({
 });
 
 export default PermmisionsScreen;
+//AIzaSyC9JLO9xk1fnmR_8EZ1k7xUEZJlPCIYiyE
