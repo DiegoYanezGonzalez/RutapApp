@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Navigator } from './src/navigation/navigator';
-import { PermissionsProvider } from './src/context/PermussionsContext';
+import { PermissionsProvider } from './src/context/PermissionsContext';
 
 
 const AppState = ({children}:any) =>{
