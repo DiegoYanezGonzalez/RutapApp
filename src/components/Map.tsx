@@ -5,6 +5,7 @@ import Geolocation from '@react-native-community/geolocation';
 import { useEffect } from 'react';
 import { useLocation } from '../hooks/useLocation';
 import { LoadingScreen } from '../pages/LoadingScreen';
+import { Fab } from './Fab';
 
 interface Props{
     markers?:Marker[];
@@ -33,6 +34,16 @@ if(!hasLocation){
        }}
      >
      </MapView>
+
+     <Fab
+     iconName='star-outline'
+     onPress={() =>console.log('Fab')}
+     style={{
+        position:'absolute',
+        bottom:20,
+        right:20
+     }}
+     />
         </>
     )
 }
