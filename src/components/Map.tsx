@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 
 import Geolocation from '@react-native-community/geolocation';
@@ -13,7 +13,23 @@ interface Props{
 
 export const Map = ({markers}:Props) => {
 // so the variables are instantiated
-const {  hasLocation,initialPosition} = useLocation();
+const {  hasLocation,initialPosition,getCurrentLocation } = useLocation();
+
+
+const mapViewRef = useRef<MapView>();
+
+const  centerPosition = async() => {
+
+const { latitude,longitude }= await getCurrentLocation();
+
+    mapViewRef.current?.animateCamera({
+        center:{
+         latitude,
+         longitude
+        }
+    })
+}
+
 
 if(!hasLocation){
     return<LoadingScreen/>
@@ -24,11 +40,12 @@ if(!hasLocation){
     return (
         <>
     <MapView
+    ref={(el) =>mapViewRef.current = el!}
           style={{flex:1}}
           showsUserLocation
           initialRegion={{
          latitude: initialPosition.latitude,
-         longitude:initialPosition.longitud,
+         longitude:initialPosition.longitude,
          latitudeDelta: 0.015,
          longitudeDelta: 0.0121,
        }}
@@ -36,8 +53,8 @@ if(!hasLocation){
      </MapView>
 
      <Fab
-     iconName='star-outline'
-     onPress={() =>console.log('Fab')}
+     iconName='compass-outline'
+     onPress={centerPosition}
      style={{
         position:'absolute',
         bottom:20,

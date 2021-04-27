@@ -7,29 +7,44 @@ export const useLocation = () => {
 
 const [hasLocation, setHasLocation] = useState(false);
 const [initialPosition, setInitialPosition] = useState<Location>({
-    longitud:0,
+    longitude:0,
     latitude:0
 });
 
     //request to obtain the current coordinates of the person
     useEffect(() => {
+
+        getCurrentLocation()
+        .then(location=>{
+            setInitialPosition(location);
+            setHasLocation(true);
+        });
+       
+    }, []);
+
+
+const getCurrentLocation = () :Promise<Location>=> {
+    return new Promise((resolve,reject) =>{
         Geolocation.getCurrentPosition(
             ({coords}) => {
-                    //here will be the first view of the map
-               setInitialPosition({
+                    
+               resolve({
                    latitude:coords.latitude,
-                   longitud:coords.longitude
+                   longitude:coords.longitude
                });
 
-               setHasLocation(true);
-
+               
             },
-            (err) => console.log({err}),{enableHighAccuracy:true}
+            (err) => reject({err}),{enableHighAccuracy:true}
          );
-    }, [])
+    });
+}
+
+
 //in these variables is stored
     return {
      hasLocation,
-     initialPosition
+     initialPosition,
+     getCurrentLocation
     }
 }
